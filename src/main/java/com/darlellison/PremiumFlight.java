@@ -1,18 +1,21 @@
 package com.darlellison;
 
-public class EconomyFlight extends Flight {
-    public EconomyFlight(String id) {
+public class PremiumFlight extends Flight {
+    public PremiumFlight(String id) {
         super(id);
     }
 
     @Override
     public boolean addPassenger(Passenger passenger) {
-        return passengersList.add(passenger);
+        if (passenger.isVip()) {
+            return passengersList.add(passenger);
+        }
+        return false;
     }
 
     @Override
     public boolean removePassenger(Passenger passenger) {
-        if (!passenger.isVip()) {
+        if (passenger.isVip()) {
             return passengersList.remove(passenger);
         }
         return false;

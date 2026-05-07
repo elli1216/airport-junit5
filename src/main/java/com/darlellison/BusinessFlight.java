@@ -2,7 +2,7 @@ package com.darlellison;
 
 public class BusinessFlight extends Flight {
     public BusinessFlight(String id) {
-        super(id, FlightType.BUSINESS);
+        super(id);
     }
 
     @Override
@@ -15,6 +15,9 @@ public class BusinessFlight extends Flight {
 
     @Override
     public boolean removePassenger(Passenger passenger) {
+        if (passenger.isVip()) {
+            return passengersList.remove(passenger);
+        }
         return false;
     }
 }

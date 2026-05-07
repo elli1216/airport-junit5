@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class Flight {
-    private String id;
+    private final String id;
     List<Passenger> passengersList = new ArrayList<>();
 
-    public Flight(String id, FlightType flightType) {
+    public Flight(String id) {
         this.id = id;
     }
 
