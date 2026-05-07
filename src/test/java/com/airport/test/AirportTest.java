@@ -1,12 +1,8 @@
 package com.airport.test;
 import com.darlellison.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class AirportTest {
@@ -49,6 +45,19 @@ public class AirportTest {
                         () -> assertEquals(0, premiumFlight.getPassengersList().size()),
                         () -> assertEquals(false, premiumFlight.removePassenger(darl)),
                         () -> assertEquals(0, premiumFlight.getPassengersList().size())
+                );
+            }
+
+            @RepeatedTest(5)
+            @DisplayName("Can't add a passenger to economy more than once")
+            public void testEconomyFlightUsualPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
+                for (int i = 0; i < repetitionInfo.getCurrentRepetition(); i++) {
+                    economyFlight.addPassenger(darl);
+                }
+                assertAll("Verify if passenger has duplicates",
+                        () -> assertEquals(1, economyFlight.getPassengersList().size()),
+                        () -> assertTrue(economyFlight.getPassengersList().contains(darl)),
+                        () -> assertTrue(economyFlight.getPassengersList().get(0).getName().equals("Darl Floresca"))
                 );
             }
         }
@@ -98,6 +107,19 @@ public class AirportTest {
                 );
             }
         }
+
+        @RepeatedTest(5)
+        @DisplayName("Can't add a passenger to business more than once")
+        public void testBusinessFlightVipPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
+            for (int i = 0; i < repetitionInfo.getCurrentRepetition(); i++) {
+                businessFlight.addPassenger(pao);
+            }
+            assertAll("Verify if passenger has duplicates",
+                    () -> assertEquals(1, businessFlight.getPassengersList().size()),
+                    () -> assertTrue(businessFlight.getPassengersList().contains(pao)),
+                    () -> assertTrue(businessFlight.getPassengersList().get(0).getName().equals("Paolo Angelo"))
+            );
+        }
     }
 
     @Nested
@@ -142,6 +164,19 @@ public class AirportTest {
                         () -> assertEquals(0, premiumFlight.getPassengersList().size())
                 );
             }
+        }
+
+        @RepeatedTest(5)
+        @DisplayName("Can't add a passenger to premium more than once")
+        public void testPremiumFlightVipPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
+            for (int i = 0; i < repetitionInfo.getCurrentRepetition(); i++) {
+                premiumFlight.addPassenger(pao);
+            }
+            assertAll("Verify if passenger has duplicates",
+                    () -> assertEquals(1, premiumFlight.getPassengersList().size()),
+                    () -> assertTrue(premiumFlight.getPassengersList().contains(pao)),
+                    () -> assertTrue(premiumFlight.getPassengersList().get(0).getName().equals("Paolo Angelo"))
+            );
         }
     }
 }
