@@ -6,6 +6,7 @@ import java.util.List;
 
 public abstract class Flight {
     private final String id;
+    private int distance;
     List<Passenger> passengersList = new ArrayList<>();
 
     public Flight(String id) {
@@ -22,6 +23,14 @@ public abstract class Flight {
 
     public String getId() {
         return id;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     public abstract boolean addPassenger(Passenger passenger);
